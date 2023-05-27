@@ -9,6 +9,9 @@ class BmiCalculatorScreen extends StatefulWidget {
 
 class _BmiCalculatorScreenState extends State<BmiCalculatorScreen> {
    bool isMale = true ;
+   double height = 150.0 ;
+   int age = 18 ;
+   int weight = 40 ;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +34,9 @@ class _BmiCalculatorScreenState extends State<BmiCalculatorScreen> {
                 Expanded(
                     child: GestureDetector(
                       onTap: (){
-                        isMale = true;
+                        setState(() {
+                          isMale = true;
+                        });
                       },
                       child: Container(
                   decoration: BoxDecoration(
@@ -64,7 +69,9 @@ class _BmiCalculatorScreenState extends State<BmiCalculatorScreen> {
                 Expanded(
                   child: GestureDetector(
                     onTap: (){
-                      isMale = false ;
+                      setState(() {
+                        isMale = false ;
+                      });
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -107,23 +114,27 @@ class _BmiCalculatorScreenState extends State<BmiCalculatorScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.baseline,
                     textBaseline: TextBaseline.alphabetic,
-                    children: const [
+                    children: [
                       Text(
-                        "165",
-                        style: TextStyle(
+                        '${height.round()}',
+                        style: const TextStyle(
                             fontSize: 48.0, fontWeight: FontWeight.bold),
                       ),
-                      Text(
+                      const Text(
                         "cm",
                         style: TextStyle(fontSize: 14.0),
                       ),
                     ],
                   ),
                   Slider(
-                    value: 165.0,
-                    min: 100.0,
+                    value: height,
+                    min: 120.0,
                     max: 220.0,
-                    onChanged: (val) {},
+                    onChanged: (value) {
+                       setState(() {
+                         height = value;
+                       });
+                    },
                     thumbColor: Colors.red,
                     inactiveColor: Colors.white12,
                     activeColor: Colors.white,
@@ -152,8 +163,8 @@ class _BmiCalculatorScreenState extends State<BmiCalculatorScreen> {
                           style:
                               TextStyle(fontSize: 20.0, color: Colors.white70),
                         ),
-                        const Text(
-                          "60",
+                         Text(
+                          "${weight}",
                           style: TextStyle(
                               fontSize: 48.0,
                               color: Colors.white,
@@ -164,7 +175,14 @@ class _BmiCalculatorScreenState extends State<BmiCalculatorScreen> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             FloatingActionButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  setState(() {
+                                    if(weight <= 40){
+                                    }else{
+                                      weight--;
+                                    }
+                                  });
+                                },
                                 backgroundColor: Colors.grey,
                                 mini: true,
                                 child: const Icon(
@@ -175,7 +193,14 @@ class _BmiCalculatorScreenState extends State<BmiCalculatorScreen> {
                               width: 10.0,
                             ),
                             FloatingActionButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                setState(() {
+                                  if(weight >= 120){
+                                  }else{
+                                    weight++;
+                                  }
+                                });
+                              },
                               backgroundColor: Colors.grey,
                               mini: true,
                               child: const Icon(
@@ -207,8 +232,8 @@ class _BmiCalculatorScreenState extends State<BmiCalculatorScreen> {
                           style:
                               TextStyle(fontSize: 20.0, color: Colors.white70),
                         ),
-                        const Text(
-                          "60",
+                         Text(
+                          "${age}",
                           style: TextStyle(
                               fontSize: 48.0,
                               color: Colors.white,
@@ -218,7 +243,15 @@ class _BmiCalculatorScreenState extends State<BmiCalculatorScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             FloatingActionButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  setState(() {
+                                    if (age <= 16){
+                                    }
+                                    else {
+                                      age--;
+                                    }
+                                  });
+                                },
                                 backgroundColor: Colors.grey,
                                 mini: true,
                                 child: const Icon(
@@ -229,7 +262,15 @@ class _BmiCalculatorScreenState extends State<BmiCalculatorScreen> {
                               width: 10.0,
                             ),
                             FloatingActionButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                setState(() {
+                                  if (age >= 60){
+                                  }
+                                  else {
+                                    age++;
+                                  }
+                                });
+                              },
                               backgroundColor: Colors.grey,
                               mini: true,
                               child: const Icon(
@@ -254,7 +295,9 @@ class _BmiCalculatorScreenState extends State<BmiCalculatorScreen> {
                     bottomRight: Radius.circular(25.0)),
                 color: Colors.pink),
             child: MaterialButton(
-              onPressed: () {},
+              onPressed: () {
+                print(height * weight / age);
+              },
               child: const Text(
                 "CALCULATOR",
                 style: TextStyle(
@@ -269,3 +312,5 @@ class _BmiCalculatorScreenState extends State<BmiCalculatorScreen> {
     );
   }
 }
+
+
