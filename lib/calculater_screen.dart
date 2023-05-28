@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:bmi_calculater/bmi_result_screen.dart';
 import 'package:flutter/material.dart';
 
 class BmiCalculatorScreen extends StatefulWidget {
@@ -177,13 +180,10 @@ class _BmiCalculatorScreenState extends State<BmiCalculatorScreen> {
                             FloatingActionButton(
                                 onPressed: () {
                                   setState(() {
-                                    if(weight <= 40){
-                                    }else{
-                                      weight--;
-                                    }
+                                    if(weight <= 40){}else{weight--;}
                                   });
                                 },
-                                backgroundColor: Colors.grey,
+                                backgroundColor: Colors.red,
                                 mini: true,
                                 child: const Icon(
                                   Icons.remove,
@@ -195,13 +195,10 @@ class _BmiCalculatorScreenState extends State<BmiCalculatorScreen> {
                             FloatingActionButton(
                               onPressed: () {
                                 setState(() {
-                                  if(weight >= 120){
-                                  }else{
-                                    weight++;
-                                  }
+                                  if(weight >= 120){}else{weight++;}
                                 });
                               },
-                              backgroundColor: Colors.grey,
+                              backgroundColor: Colors.green,
                               mini: true,
                               child: const Icon(
                                 Icons.add,
@@ -245,14 +242,10 @@ class _BmiCalculatorScreenState extends State<BmiCalculatorScreen> {
                             FloatingActionButton(
                                 onPressed: () {
                                   setState(() {
-                                    if (age <= 16){
-                                    }
-                                    else {
-                                      age--;
-                                    }
+                                    if (age <= 16){} else {age--;}
                                   });
                                 },
-                                backgroundColor: Colors.grey,
+                                backgroundColor: Colors.red,
                                 mini: true,
                                 child: const Icon(
                                   Icons.remove,
@@ -264,14 +257,10 @@ class _BmiCalculatorScreenState extends State<BmiCalculatorScreen> {
                             FloatingActionButton(
                               onPressed: () {
                                 setState(() {
-                                  if (age >= 60){
-                                  }
-                                  else {
-                                    age++;
-                                  }
+                                  if (age >= 60){} else {age++;}
                                 });
                               },
-                              backgroundColor: Colors.grey,
+                              backgroundColor: Colors.green,
                               mini: true,
                               child: const Icon(
                                 Icons.add,
@@ -290,20 +279,22 @@ class _BmiCalculatorScreenState extends State<BmiCalculatorScreen> {
           Container(
             width: double.infinity,
             decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(25.0),
-                    bottomRight: Radius.circular(25.0)),
                 color: Colors.pink),
             child: MaterialButton(
               onPressed: () {
-                print(height * weight / age);
+                double result = weight / pow(height/ 100,2);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute( builder: (context )=> BmiResultScreen(
+                    result: result.round(), age: age, gender: isMale,
+                    ) ));
               },
               child: const Text(
                 "CALCULATOR",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
-                    fontSize: 24.0),
+                    fontSize: 32.0),
               ),
             ),
           )
